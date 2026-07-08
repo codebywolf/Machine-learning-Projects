@@ -10,3 +10,4 @@ spacy==3.8.14
 streamlit==1.51.0
 torch==2.5.1
 transformers==5.9.0
+torchvision==0.19.1
