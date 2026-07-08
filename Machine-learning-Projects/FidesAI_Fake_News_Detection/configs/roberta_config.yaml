@@ -1,0 +1,27 @@
+# Project Directory Configurations
+paths:
+  train_data: "data/raw/WELFake.csv"
+  isot_true: "data/raw/ISOT_True.csv"
+  isot_fake: "data/raw/ISOT_Fake.csv"
+  output_dir: "artifacts/roberta_model"
+  logging_dir: "logs/"
+
+# Model & Tokenizer Specifications
+model:
+  model_name_or_path: "roberta-base"
+  num_labels: 2
+  max_length: 256  # Sliced length to balance context retention and GPU VRAM capacity
+
+# Training Hyperparameters
+training_args:
+  num_train_epochs: 3
+  per_device_train_batch_size: 16
+  per_device_eval_batch_size: 16
+  warmup_steps: 500
+  weight_decay: 0.01
+  learning_rate: 2e-5  # Safe, standard starting learning rate for fine-tuning transformers
+  evaluation_strategy: "epoch"
+  save_strategy: "epoch"
+  load_best_model_at_end: true
+  metric_for_best_model: "f1"
+  fp16: true  # Set to true if your GPU supports mixed precision training to maximize speed
