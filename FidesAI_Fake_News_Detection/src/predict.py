@@ -3,7 +3,7 @@ import torch
 import torch.nn.functional as F
 import numpy as np
 import joblib
-from transformers import RobertaTokenizer, RobertaForSequenceClassification
+from transformers import AutoTokenizer, AutoModelForSequenceClassification
 
 class ProductionInferenceEngine:
     def __init__(
@@ -30,8 +30,8 @@ class ProductionInferenceEngine:
             # =================================================
 
             # ======== When Cloud Roberta is available ========
-            self.tokenizer = RobertaTokenizer.from_pretrained(model_path)
-            self.transformer = RobertaForSequenceClassification.from_pretrained(model_path, torch_dtype=torch.float16)
+            self.tokenizer = AutoTokenizer.from_pretrained(model_path)
+            self.transformer = AutoModelForSequenceClassification.from_pretrained(model_path, torch_dtype=torch.float16)
             # =================================================
 
             self.transformer.to(self.device)
